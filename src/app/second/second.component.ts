@@ -17,8 +17,10 @@ export class SecondComponent implements OnInit {
     }
 
     start() {
-        this.timerWork = true;
-        this.infinityTimer();
+        if (this.timerWork === false) {
+            this.timerWork = true;
+            this.infinityTimer();
+        }
     }
 
     stop() {
