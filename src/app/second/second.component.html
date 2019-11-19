@@ -1,6 +1,16 @@
-<app-display-var [content]="this.store.increaseVariable">
+<app-display-var [content]="store.increaseVariable">
 </app-display-var>
-<app-display-var [content]="this.store.decreaseVariable">
+<app-display-var [content]="store.decreaseVariable">
 </app-display-var>
-<button mat-button (click)="start()">Start</button>
-<button mat-button (click)="stop()">Stop</button>
+<button mat-button
+        (click)="start()">
+    Start
+</button>
+<button mat-button
+        (click)="stop()">
+    Stop
+</button>
+<button mat-button
+        (click)="store.reset()">
+    Reset
+</button>
