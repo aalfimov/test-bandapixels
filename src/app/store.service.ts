@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
     providedIn: 'root'
 })
 export class StoreService {
-    private increaseVariable = -5;
-    private decreaseVariable = 10;
+    increaseVariable = -5;
+    decreaseVariable = 10;
 
     constructor() {
     }
@@ -18,5 +18,8 @@ export class StoreService {
         this.decreaseVariable--;
     }
     change() {
+        this.increase();
+        this.decrease();
+        this.decrease();
     }
 }
