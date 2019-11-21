@@ -6,6 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DisplayVarComponent} from './display-var/display-var.component';
 import {SecondComponent} from './second/second.component';
 import {MatButtonModule} from '@angular/material';
+import {StoreModule} from '@ngrx/store';
+import {reducers, metaReducers} from './reducers';
 
 @NgModule({
     declarations: [
@@ -16,7 +18,14 @@ import {MatButtonModule} from '@angular/material';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        MatButtonModule
+        MatButtonModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers,
+            runtimeChecks: {
+                strictStateImmutability: true,
+                strictActionImmutability: true
+            }
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]
