@@ -1,11 +1,13 @@
 import {CounterState} from './counter.state';
 import {CounterActions, CounterActionTypes, Decrement, Increment} from './counter.actions';
 
-// todo: reset don't work
-// todo: bug with fast click start/stop button
+
+const firstVariableStartValue = -5;
+const secondVariableStartValue = 10;
+
 export const initialCounterState: CounterState = {
-    firstVar: -5,
-    secondVar: 10,
+    firstVar: firstVariableStartValue,
+    secondVar: secondVariableStartValue,
 };
 
 export function counterReducer(state = initialCounterState, action: CounterActions): CounterState {
@@ -25,9 +27,9 @@ export function counterReducer(state = initialCounterState, action: CounterActio
             return state;
         }
         case CounterActionTypes.RESET: {
-            // state.firstVar = initialCounterState.firstVar;
-            // state.secondVar = initialCounterState.secondVar;
-            return state = initialCounterState;
+            state.firstVar = firstVariableStartValue;
+            state.secondVar = secondVariableStartValue;
+            return state;
         }
         default: {
             return state;

@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {StoreService} from '../../store/old-service/store.service';
-
 import {Store} from '@ngrx/store';
+import {Observable, timer} from 'rxjs';
+
 import {AppState} from '../../store/app.state';
-import {Observable} from 'rxjs';
 import {Change, Reset} from '../../store/counter-state/counter.actions';
+import {take} from 'rxjs/operators';
 
 @Component({
     selector: 'app-second',
     templateUrl: './second.component.html',
-    styleUrls: ['./second.component.css']
+    styleUrls: ['./second.component.css'],
 })
 export class SecondComponent implements OnInit {
     private timerWork = false;
-    private firstVar: Observable <number>;
-    private secondVar: Observable <number>;
+    private firstVar: Observable<number>;
+    private secondVar: Observable<number>;
 
-    constructor(private store: StoreService, private storage: Store<AppState>) {
+    constructor(private storage: Store<AppState>) {
         this.firstVar = storage.select(state => state.counter.firstVar);
         this.secondVar = storage.select(state => state.counter.secondVar);
     }
@@ -24,27 +24,33 @@ export class SecondComponent implements OnInit {
     ngOnInit() {
     }
 
+// todo: bug with fast click start/stop button
     start() {
+
         if (!this.timerWork) {
             this.timerWork = true;
             this.infinityTimer();
+            // const numbers = timer(1000, 1000);
+            // numbers.subscribe(x => console.log(x));
         }
     }
 
     infinityTimer() {
-        setTimeout(() => {
+        timer(1000).subscribe(() => {
             if (this.timerWork) {
                 this.storage.dispatch(new Change());
                 this.infinityTimer();
             }
-        }, 1000);
+        });
     }
 
     stop() {
         this.timerWork = false;
+        clearTimeout();
     }
 
     reset() {
+        this.stop();
         this.storage.dispatch(new Reset());
     }
 }
