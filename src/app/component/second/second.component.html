@@ -1,21 +1,17 @@
-<!--<app-display-var [content]="store.increaseVariable">-->
-<!--</app-display-var>-->
-<!--<app-display-var [content]="store.decreaseVariable">-->
-<!--</app-display-var>-->
-<!--<button mat-button-->
-<!--        (click)="start()">-->
-<!--    Start-->
-<!--</button>-->
-<!--<button mat-button-->
-<!--        (click)="stop()">-->
-<!--    Stop-->
-<!--</button>-->
-<!--<button mat-button-->
-<!--        (click)="store.reset()">-->
-<!--    Reset-->
-<!--</button>-->
-
-
+<app-display-var [content$]="firstVar"></app-display-var>
+<app-display-var [content$]="secondVar"></app-display-var>
 <br>
-<app-display-var [content]="firstVar"></app-display-var>
-<app-display-var [content]="secondVar"></app-display-var>
+<button mat-button
+        (click)="start()">
+    Start
+</button>
+<button mat-button
+        (click)="stop()">
+    Stop
+</button>
+<button mat-button
+        (click)="reset()">
+    Reset
+</button>
+
+

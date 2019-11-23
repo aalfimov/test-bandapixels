@@ -1,4 +1,4 @@
-<div [ngClass]="{'red': content<0, 'blue': content>0}"
+<div [ngClass]="{'red': (content$ | async) < 0, 'blue': (content$ | async) > 0}"
      class="content">
-    {{content | async}}
+    {{content$ | async}}
 </div>

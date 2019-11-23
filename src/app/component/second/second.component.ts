@@ -4,7 +4,7 @@ import {StoreService} from '../../store/old-service/store.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.state';
 import {Observable} from 'rxjs';
-import {CounterState} from '../../store/counter-state/counter.state';
+import {Change, Reset} from '../../store/counter-state/counter.actions';
 
 @Component({
     selector: 'app-second',
@@ -13,21 +13,12 @@ import {CounterState} from '../../store/counter-state/counter.state';
 })
 export class SecondComponent implements OnInit {
     private timerWork = false;
-    private readonly firstVar: Observable <number>;
-    private readonly secondVar: Observable <number>;
+    private firstVar: Observable <number>;
+    private secondVar: Observable <number>;
 
     constructor(private store: StoreService, private storage: Store<AppState>) {
-
         this.firstVar = storage.select(state => state.counter.firstVar);
         this.secondVar = storage.select(state => state.counter.secondVar);
-        console.log(this.storage);
-        console.log(this.firstVar);
-        // private store: Store<fromRoot.State>
-        // console.log(reducer(store1, new Decrement()));
-        // console.log(reducer(st, new  Increment()));
-        // console.log(reducer({firstVar: 0, secondVar: 0}, new Decrement()));
-        // console.log(reducer({firstVar: 0, secondVar: 0}, new Change()));
-        // console.log(reducer({firstVar: 0, secondVar: 0}, new Reset()));
     }
 
     ngOnInit() {
@@ -39,16 +30,21 @@ export class SecondComponent implements OnInit {
             this.infinityTimer();
         }
     }
-    stop() {
-        this.timerWork = false;
-    }
 
     infinityTimer() {
         setTimeout(() => {
             if (this.timerWork) {
-                this.store.change();
+                this.storage.dispatch(new Change());
                 this.infinityTimer();
             }
         }, 1000);
+    }
+
+    stop() {
+        this.timerWork = false;
+    }
+
+    reset() {
+        this.storage.dispatch(new Reset());
     }
 }

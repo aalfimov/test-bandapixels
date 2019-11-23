@@ -7,12 +7,11 @@ import {Observable} from 'rxjs';
     styleUrls: ['./display-var.component.scss']
 })
 export class DisplayVarComponent implements OnInit {
-    @Input() content: Observable <number>;
+    @Input() content$: Observable <number>;
 
     constructor() {
     }
 
     ngOnInit() {
-        console.log(this.content.subscribe(console));
     }
 }
