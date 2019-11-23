@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-display-var',
@@ -6,12 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
     styleUrls: ['./display-var.component.scss']
 })
 export class DisplayVarComponent implements OnInit {
-    @Input() content: number;
+    @Input() content: Observable <number>;
 
     constructor() {
     }
 
     ngOnInit() {
+        console.log(this.content.subscribe(console));
     }
-
 }

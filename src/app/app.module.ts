@@ -3,11 +3,11 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DisplayVarComponent} from './display-var/display-var.component';
-import {SecondComponent} from './second/second.component';
+import {DisplayVarComponent} from './component/display-var/display-var.component';
+import {SecondComponent} from './component/second/second.component';
 import {MatButtonModule} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
-import {reducers, metaReducers} from './reducers';
+import {reducers} from './store/app.reducer';
 
 @NgModule({
     declarations: [
@@ -19,13 +19,7 @@ import {reducers, metaReducers} from './reducers';
         BrowserModule,
         BrowserAnimationsModule,
         MatButtonModule,
-        StoreModule.forRoot(reducers, {
-            metaReducers,
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true
-            }
-        })
+        StoreModule.forRoot(reducers)
     ],
     providers: [],
     bootstrap: [AppComponent]
