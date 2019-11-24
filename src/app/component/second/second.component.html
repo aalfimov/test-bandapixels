@@ -3,12 +3,12 @@
 <br>
 <button mat-button
         (click)="start()"
-        [disabled]="timerWork === true">
+        [disabled]="timerWork">
     Start
 </button>
 <button mat-button
         (click)="stop()"
-        [disabled]="timerWork === false">
+        [disabled]="!timerWork">
     Stop
 </button>
 <button mat-button

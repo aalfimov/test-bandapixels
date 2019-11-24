@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable, timer} from 'rxjs';
+import {Observable, Subscription, timer} from 'rxjs';
 
 import {AppState} from '../../store/app.state';
 import {Change, Reset} from '../../store/counter-state/counter.actions';
-import {take} from 'rxjs/operators';
 
 @Component({
     selector: 'app-second',
@@ -13,6 +12,7 @@ import {take} from 'rxjs/operators';
 })
 export class SecondComponent implements OnInit {
     private timerWork = false;
+    private timer: Subscription;
     private firstVar: Observable<number>;
     private secondVar: Observable<number>;
 
@@ -24,32 +24,28 @@ export class SecondComponent implements OnInit {
     ngOnInit() {
     }
 
+
 // todo: bug with fast click start/stop button
     start() {
-
         if (!this.timerWork) {
             this.timerWork = true;
             this.infinityTimer();
-            // const numbers = timer(1000, 1000);
-            // numbers.subscribe(x => console.log(x));
         }
     }
 
     infinityTimer() {
-        timer(1000).subscribe(() => {
-            if (this.timerWork) {
+        this.timer = timer(1000).subscribe(() => {
                 this.storage.dispatch(new Change());
                 this.infinityTimer();
-            }
-        });
+            });
     }
 
-    stop() {
+stop() {
         this.timerWork = false;
-        clearTimeout();
+        this.timer.unsubscribe();
     }
 
-    reset() {
+reset() {
         this.stop();
         this.storage.dispatch(new Reset());
     }
