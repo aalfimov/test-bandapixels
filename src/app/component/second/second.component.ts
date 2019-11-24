@@ -13,19 +13,17 @@ import {Change, Reset} from '../../store/counter-state/counter.actions';
 export class SecondComponent implements OnInit {
     private timerWork = false;
     private timer: Subscription;
-    private firstVar: Observable<number>;
-    private secondVar: Observable<number>;
+    private firstVar$: Observable<number>;
+    private secondVar$: Observable<number>;
 
     constructor(private storage: Store<AppState>) {
-        this.firstVar = storage.select(state => state.counter.firstVar);
-        this.secondVar = storage.select(state => state.counter.secondVar);
+        this.firstVar$ = storage.select(state => state.counter.firstVar);
+        this.secondVar$ = storage.select(state => state.counter.secondVar);
     }
 
     ngOnInit() {
     }
 
-
-// todo: bug with fast click start/stop button
     start() {
         if (!this.timerWork) {
             this.timerWork = true;
@@ -40,13 +38,13 @@ export class SecondComponent implements OnInit {
             });
     }
 
-stop() {
+    stop() {
         this.timerWork = false;
         this.timer.unsubscribe();
     }
 
-reset() {
-        this.stop();
-        this.storage.dispatch(new Reset());
-    }
+    reset() {
+            this.stop();
+            this.storage.dispatch(new Reset());
+        }
 }
