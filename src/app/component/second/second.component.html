@@ -2,11 +2,13 @@
 <app-display-var [content$]="secondVar$"></app-display-var>
 <br>
 <button mat-button
-        (click)="start()">
+        (click)="start()"
+        [disabled]="timerWork">
     Start
 </button>
 <button mat-button
-        (click)="timerSubscription.unsubscribe()">
+        (click)="stop()"
+        [disabled]="!timerWork">
     Stop
 </button>
 <button mat-button
